@@ -1,0 +1,120 @@
+import java.util.*;
+
+class Student {
+    private int id;
+    private String name;
+    private String course;
+    private double marks;
+
+    public Student(int id, String name, String course, double marks) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+        this.marks = marks;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public void setMarks(double marks) {
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id +
+                ", Name: " + name +
+                ", Course: " + course +
+                ", Marks: " + marks;
+    }
+}
+
+public class StudentManagementSystem {
+
+    static ArrayList<Student> studentList = new ArrayList<>();
+    static HashMap<Integer, Student> studentMap = new HashMap<>();
+
+    // Add Student
+    public static void addStudent(Student s) {
+        studentList.add(s);
+        studentMap.put(s.getId(), s);
+        System.out.println("Student Added Successfully.");
+    }
+
+    // Search Student
+    public static void searchStudent(int id) {
+        if (studentMap.containsKey(id)) {
+            System.out.println(studentMap.get(id));
+        } else {
+            System.out.println("Student Not Found.");
+        }
+    }
+
+    // Update Student
+    public static void updateStudent(int id, String name, String course, double marks) {
+        Student s = studentMap.get(id);
+
+        if (s != null) {
+            s.setName(name);
+            s.setCourse(course);
+            s.setMarks(marks);
+            System.out.println("Student Updated Successfully.");
+        } else {
+            System.out.println("Student Not Found.");
+        }
+    }
+
+    // Delete Student
+    public static void deleteStudent(int id) {
+        Student s = studentMap.remove(id);
+
+        if (s != null) {
+            studentList.remove(s);
+            System.out.println("Student Deleted Successfully.");
+        } else {
+            System.out.println("Student Not Found.");
+        }
+    }
+
+    // Display Students
+    public static void displayStudents() {
+        if (studentList.isEmpty()) {
+            System.out.println("No Student Records Found.");
+            return;
+        }
+
+        System.out.println("\nStudent Records:");
+        for (Student s : studentList) {
+            System.out.println(s);
+        }
+    }
+
+    public static void main(String[] args) {
+
+        addStudent(new Student(101, "Pooja", "CSE", 92.5));
+        addStudent(new Student(102, "Rahul", "ECE", 88.0));
+        addStudent(new Student(103, "Anjali", "IT", 95.0));
+
+        displayStudents();
+
+        System.out.println("\nSearching Student (ID = 102):");
+        searchStudent(102);
+
+        System.out.println("\nUpdating Student (ID = 102):");
+        updateStudent(102, "Rahul Sharma", "ECE", 91.5);
+        displayStudents();
+
+        System.out.println("\nDeleting Student (ID = 101):");
+        deleteStudent(101);
+        displayStudents();
+    }
+}
