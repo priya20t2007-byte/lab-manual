@@ -1,0 +1,36 @@
+class PiValue {
+
+    // Public variable
+    public final double PI = 3.141592653589793;
+
+    // Private variable
+    private double radius;
+
+    // Protected method
+    protected void setRadius(double r) {
+        radius = r;
+    }
+
+    // Public method to calculate area of a circle
+    public double calculateArea() {
+        return PI * radius * radius;
+    }
+
+    // Public method to display Pi value
+    public void displayPi() {
+        System.out.println("Value of Pi = " + PI);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        PiValue obj = new PiValue();
+
+        obj.displayPi();
+
+        obj.setRadius(7);
+
+        System.out.println("Area of Circle = " + obj.calculateArea());
+    }
+}
